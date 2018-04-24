@@ -10,14 +10,14 @@ OldSyntax.prototype.doSomething = function(arg){
 	return 'old syntax';
 }
 
-let old = new OldSyntax();
+//let old = new OldSyntax();
 
-console.log(old.doSomething(1,[2,3],4));
+//console.log(old.doSomething(1,[2,3],4));
 
 //новый синтаксис
 class NewSyntax{
 	constructor(){
-		console.log('constructor');
+//		console.log('constructor');
 	}
 
 	doSomething(arg1_){
@@ -30,21 +30,25 @@ class NewSyntax{
 		
 		if (typeof num !== 'number')
 			return callback !== null ? callback(new Error('not a number')) : false;
-			
-	
+                
+                //запускаем асинхронное выполнение
+                process.nextTick(
+                        () => callback(null, fib(num))
+                    );
 		//console.log(typeof(callback_));
 	}
 }
 
-let oldSyntax = new OldSyntax();
+//let oldSyntax = new OldSyntax();
 let newSyntax = new NewSyntax();
 
-newSyntax.callBack('1');
-newSyntax.callBack(1);
-newSyntax.callBack('2',(err, data)=>{console.error(err)});
+//newSyntax.callBack('1');
+//newSyntax.callBack(1);
+//newSyntax.callBack('2',(err, data)=>{console.error(err)});
 newSyntax.callBack(1,(err,data)=>{
-	console.error('my_test_function', err);
+	console.error('my_test_function', err, data);
 });
+console.log('test');
 
 //console.log(oldSyntax.doSomething(1,[2,3],4));
 //console.log(newSyntax.doSomething(1,[2,3],4));

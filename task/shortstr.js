@@ -4,6 +4,28 @@
  */
 
 let str = (str)=>{
+    return str.split('').reduce(
+        (res, current, item, arr)=>{
+            if(arr[item+1] !== undefined){
+                if(current === arr[item+1]){
+                    res[res.length - 1]['count']++;
+                }else{
+                    res.push({value: arr[item+1], count: 1});
+                }
+            }
+            return res;
+        },
+        [{value: str[0], count: 1}]
+    ).reduce(
+        (res, current)=>{
+            return res += (current.count === 1) ? 
+                            current.value : current.value+current.count
+        },
+        ''
+    );
+}
+
+let str2 = (str)=>{
     let res = '';
     let char = [];
     char[0] = {value: str[0], count: 1};
@@ -18,11 +40,10 @@ let str = (str)=>{
         res += (char[i].count === 1) ? 
             char[i].value : char[i].value+char[i].count;
     }
-    console.log(res);
     return res;
 }
 
-str('АА');
-str('АBBB');
-str('АBBBFFEEETRR');
+console.log(str('АА'));
+console.log(str('АBBB'));
+console.log(str('АBBBFFEEETRR'));
 

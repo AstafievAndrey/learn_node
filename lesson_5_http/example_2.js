@@ -9,33 +9,31 @@ let postData = querystring.stringify({
 let options = {
     hostname:'localhost',
     port: config.port,
+    method: 'POST',
     headers:{
         'Content-Type': config.headers.appForm['Content-Type'],
         'Content-Length':postData.length
     }
 };
 
-console.log(options);
+let req = http.request(options,(response)=>{
+    console.log(`STATUS: ${response.statusCode}`);
+    console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
+    response.setEncoding('utf8');
+    // Получение данных по фрагментам
+    response.on('data', (chunk)=> {
+        console.log('BODY: ' + chunk);
+    });
+    // Завершение ответа
+    response.on('end',() => {
+        console.log(`No more data in response.`)
+    })
+});
 
-//let server = http.createServer().listen(PORT);
-//
-//server.on('request', (request, response)=>{
-//    if(request.method === 'POST'){
-//        let body = '';
-//        request.on('data',(data)=>{
-//            body += data;
-//        });
-//        //переданные данные
-//        request.on('end',()=>{
-//            let post = querystring.parse(body);
-//            console.log(post);
-//            response.writeHead(200, ${config.textPlain});
-//            response.end(
-//                    `Hello world! server listen on port ${config.port}!\n`
-//                );
-//        });
-//    }
-//});
-//
-//console.log(`server listen on port ${config.port}`);
+req.on('error', (e) =>{
+    console.log(`problem with request: ${e.message}`);
+});
+// Запись данных в тело запроса
+req.write(postData);
+req.end();
 

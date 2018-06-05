@@ -17,8 +17,8 @@ let options = {
 };
 
 let req = http.request(options,(response)=>{
-    console.log(`STATUS: ${response.statusCode}`);
-    console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
+//    console.log(`STATUS: ${response.statusCode}`);
+//    console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
     response.setEncoding('utf8');
     // Получение данных по фрагментам
     response.on('data', (chunk)=> {

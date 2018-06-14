@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AstafievAndrey/learn_node#readme",
   "dependencies": {
+    "chokidar": "^2.0.3",
     "stat-mode": "^0.2.2"
   }
 }

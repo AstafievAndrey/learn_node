@@ -3,11 +3,15 @@
  * действителен ли порядок скобок. 
  * Функция должна возвращать true, если строка действительна, 
  * и false, если она недействительна.
+ * http://jsben.ch/LlwDG -- ссылка на тест по скорости
  */
 
-let validParentheses = (parens)=>{
+let validParenthesesReduce = (parens)=>{
     let res = parens.split('').reduce(
             (val, current) => {
+                if(val === -1){
+                    return val;
+                }
                 if(current==='('){
                     return ++val;
                 }
@@ -15,8 +19,7 @@ let validParentheses = (parens)=>{
                     if(val > 0){
                         return --val;
                     }else{
-                        val = -1;
-                        break;
+                        return -1;
                     }
                 }
                 return val;
@@ -26,10 +29,29 @@ let validParentheses = (parens)=>{
     return  res === 0 ? true : false;
 }
 
-console.log(validParentheses(')'));
-console.log(validParentheses('())'));
-console.log(validParentheses('(())'));
-console.log(validParentheses(')('));
+let validParenthesesWhile = (parens)=>{
+    let tokenizer = /[()]/g, 
+        count = 0,           
+        token;
+    while(token = tokenizer.exec(parens), token !== null){
+        if(token == "(") {
+           count++;
+        } else if(token == ")") {
+            count--;
+            if(count < 0) {
+               return false;
+            }
+        }
+    }
+    return count == 0;
+} 
 
-//Test.assertEquals(validParentheses( "()" ), true);
-//Test.assertEquals(validParentheses( "())" ), false);
+console.log(validParenthesesReduce(')'));
+console.log(validParenthesesReduce('())'));
+console.log(validParenthesesReduce('(())'));
+console.log(validParenthesesReduce(')('));
+console.log('--------------------------');
+console.log(validParenthesesWhile(')'));
+console.log(validParenthesesWhile('())'));
+console.log(validParenthesesWhile('(())'));
+console.log(validParenthesesWhile(')('));

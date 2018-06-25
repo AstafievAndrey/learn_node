@@ -1,3 +1,4 @@
 /nbproject/
 lesson_3/*.txt
 node_modules
+get_request/config.js

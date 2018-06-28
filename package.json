@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AstafievAndrey/learn_node#readme",
   "dependencies": {
     "chokidar": "^2.0.3",
+    "node-mysql": "^0.4.2",
     "stat-mode": "^0.2.2"
   }
 }

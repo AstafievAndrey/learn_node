@@ -6,11 +6,11 @@ console.log(process.argv);
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+    database: 'nodedatabase',
     password: 'password'
 });
 
 connection.connect();
-connection.query('USE nodedatabase');
 
 let username = process.argv[2];
 let userpass = process.argv[3];
@@ -22,7 +22,7 @@ let hashpassword = crypto.createHash('sha512')
 //создаем запись пользователя
 connection.query(
     'INSERT INTO user SET username = ?, passwordhash = ?, salt = ?',
-    [username, userpass, salt],
+    [username, hashpassword, salt],
     function(err, result){
         if(err) console.log(err);
         connection.end();

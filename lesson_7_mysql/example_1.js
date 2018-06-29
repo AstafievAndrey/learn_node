@@ -1,13 +1,14 @@
 const mysql = require('mysql'); 
 const crypto = require('crypto');
+const config = require('./config.js');
 
 console.log(process.argv);
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'nodedatabase',
-    password: 'password'
+    host: config.host,
+    database: config.database,
+    user: config.user,
+    password: config.password
 });
 
 connection.connect();

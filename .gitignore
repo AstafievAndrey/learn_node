@@ -2,3 +2,4 @@
 lesson_3/*.txt
 node_modules
 get_request/config.js
+lesson_8_redis/redis-stable/

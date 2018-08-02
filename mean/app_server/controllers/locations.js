@@ -1,10 +1,10 @@
 
 module.exports.homelist = function(req, res){
-    res.render('index',{title:'home'});
+    res.render('location-list',{title:'home'});
 }
 
 module.exports.locationInfo = function(req, res){
-    res.render('index',{title:'Location Info'});
+    res.render('location-info',{title:'Location Info'});
 }
 
 module.exports.addReview = function(req, res){

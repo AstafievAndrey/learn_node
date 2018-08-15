@@ -1,50 +1,43 @@
 extends layout
-
+include _includes/sharedHTMLfunctions
 block content
   #banner.page-header
     .row
       .col-lg-6
-        h1 starcups
+        h1= pageHeader.title
     .row
       .col-xs-12.col-md-9
         .row
           .col-xs-12.col-sm-6
             p.rating
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            p 125 area address
+              +outputRating(location.rating)
+            p= location.address
             .panel.panel-primary
               .panel-heading
                 h2.panel-title opening hours
               .panel-body
-                p monday - friday : 7:00am - 7:00pm
-                p saturday : 8:00am - 5:00pm
-                p sunday : closed
+                each time in location.openingTimes
+                  p 
+                    | #{time.days}
+                    if time.closed
+                      | closed
+                    else
+                      | #{time.opening} - #{time.closing}
             .panel.panel-panel-primary
               .panel-heading
                 h2.panel-title facilities
               .panel-body
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Hot drinks
-                | &nbsp;
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Food
-                | &nbsp;
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Premium wifi
-                | &nbsp;
+                each facility in location.facilities
+                  span.label.label-warning
+                    span.glyphicon.glyphicon-ok
+                    | &nbsp; #{facility}
+                  | &nbsp;
           .col-xs-12.col-sm-6.location-map
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Location map
               .panel-body
-                img.img-responsive.img-rounded(src='images/kotik.jpg')
+                img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2")
 
     .row
       .col-xs-12
@@ -53,32 +46,19 @@ block content
             a.btn.btn-default.pull-right(href='/locations/review/new') add review
             h2.panel-title customer reviews
           .panel-body.review-container
-            .row
-              .review
-                .well.well-sm.review-header
-                  span.rating
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                  span.reviewAuthor simon holmes
-                  small.reviewTimestamp 16 July 2013
-                .col-xs-12
-                  p good place. very nice. i'm fine.
-            .row
-              .review
-                .well.well-sm.review-header
-                  span.rating
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                    span.glyphicon.glyphicon-star
-                  span.reviewAuthor simon holmes
-                  small.reviewTimestamp 16 July 2013
-                .col-xs-12
-                  p good place. very nice. i'm fine.
-            
+            each review in location.reviews
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      +outputRating(review.rating)
+                    span.reviewAuthor #{review.author}
+                    small.reviewTimestamp #{review.timestamp}
+                  .col-xs-12
+                    p !{(review.reviewText).replace(/\n/g, '<br/>')}
+    .row
+      .col-xs-12.col-md-3
+        p.lead #{location.name} #{sidebar.context}
+        p= sidebar.callToAction        
 
 

@@ -24,7 +24,7 @@ process.on('SIGINT', function () {
 
 
 //mongodb://username:password@localhost:27027/database - полный вариант подключения
-var dbUri = 'mongodb://localhost/Loc8r';//сокращенный вариант подключения
+var dbUri = 'mongodb://localhost/Loc8r';//сокращенный вариант подключения deprecated
 mongoose.connect(dbUri);
 
 

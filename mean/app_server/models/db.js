@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var readLine = require('readline');
 var console = require('console');
+var process = require('process');
 
 var gracefullShutdown = function (msg, callback) {
     mongoose.connection.close(function () {

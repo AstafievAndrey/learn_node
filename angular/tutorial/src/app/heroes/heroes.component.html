@@ -3,12 +3,10 @@
     <div class="col-sm-12">
       <ul class="list-group">
         <li class="list-group-item" 
-          [class.active]="hero === selectedHero"
-          *ngFor="let hero of Heroes" (click)="onSelect(hero)">
-          {{hero.name}}
+          *ngFor="let hero of heroes">
+          <a routerLink="/detail/{{hero.id}}">{{hero.name}}</a>
         </li>
       </ul>
      </div>
-     <app-hero-detail [hero]="selectedHero"></app-hero-detail>
   </div>
 </div>

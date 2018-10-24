@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12" *ngIf="messageService.messages.length">
+      <h2>Messages</h2>
+      <button class="btn" (click)="messageService.clear()">clear</button>
+      <p *ngFor="let message of messageService.messages">{{message}}</p>
+    </div>
+  </div>
+</div>

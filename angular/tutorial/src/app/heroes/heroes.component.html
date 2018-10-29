@@ -5,8 +5,17 @@
         <li class="list-group-item" 
           *ngFor="let hero of heroes">
           <a routerLink="/detail/{{hero.id}}">{{hero.name}}</a>
+          <button class="delete" (click)="delete(hero)">x</button>
         </li>
       </ul>
      </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label for="">
+        <input type="text" #heroName>
+      </label>
+      <button (click)="add(heroName.value); heroName.value=''">add</button>
+    </div>
   </div>
 </div>

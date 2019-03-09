@@ -1,0 +1,1 @@
+console.log('package index.js');
